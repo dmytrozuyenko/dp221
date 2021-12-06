@@ -1,8 +1,10 @@
 //listeners
 document.querySelector('.on-search').addEventListener('click', onSearch);
+// document.querySelector('.reset').addEventListener('click',resetButton);
 
 const DATA = {
     input : document.querySelector('.inp-search'),
+    reset : document.querySelector('.inp-reset'),
     output : document.querySelector('.output'),
     images : document.querySelector('.images'),
     links : {
@@ -28,12 +30,7 @@ function loadData(val){
 
 function renderData(data){
     console.log(data);
-    DATA.output.innerHTML = data.data.map(detailsController).join('');
-}
-
-function detailsController(artwork){
-    loadDetails(artwork);
-    return getHTML(artwork);
+    data.data.map(loadDetails);
 }
 
 function loadDetails({ id }){
@@ -42,17 +39,27 @@ function loadDetails({ id }){
         .then(r => r.json())
         .then(d => {
             const imageURL = DATA.links.getImage(d.data.image_id);
-            const imgHTML = `<img src="${ imageURL }">`;
-            DATA.images.insertAdjacentHTML('beforeend', imgHTML);
-        })
+            DATA.output.innerHTML += getHTML(d.data, imageURL)
+        }
+        )
 }
 
-function getHTML(artwork){
+function getHTML(artwork, image){
     return `<div class="card m-1" style="width: 18rem;">
+    <img src="${ image }" class="card-img-top" alt="...">
     <div class="card-body">
         <h5 class="card-title">${ artwork.title }</h5>
         <h6 class="card-subtitle mb-2 text-muted">${ artwork.id }</h6>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">${ artwork.artist_title }</li>
+        </ul>
+        <div class="card-body">
         <p class="card-text">${ artwork.thumbnail.alt_text }</p>
     </div>
     </div>`;
 }
+
+// function resetButton(){
+    
+// }
