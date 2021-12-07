@@ -1,10 +1,9 @@
 //listeners
 document.querySelector('.on-search').addEventListener('click', onSearch);
-// document.querySelector('.reset').addEventListener('click',resetButton);
+document.querySelector('.reset-button').addEventListener('click',resetButton);
 
 const DATA = {
     input : document.querySelector('.inp-search'),
-    reset : document.querySelector('.inp-reset'),
     output : document.querySelector('.output'),
     images : document.querySelector('.images'),
     links : {
@@ -60,6 +59,7 @@ function getHTML(artwork, image){
     </div>`;
 }
 
-// function resetButton(){
-    
-// }
+function resetButton() {
+    DATA.output.innerHTML = "";
+    DATA.input.value = "";
+}
