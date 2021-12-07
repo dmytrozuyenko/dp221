@@ -9,7 +9,7 @@ const DATA = {
     images : document.querySelector('.images'),
     links : {
         search : 'https://api.artic.edu/api/v1/artworks/search?q=',
-        getImage : id => `https://www.artic.edu/iiif/2/${ id }/full/843,/0/default.jpg`,
+        getImage : id => `https://www.artic.edu/iiif/2/${ id }/full/200,/0/default.jpg`,
         details : 'https://api.artic.edu/api/v1/artworks/'
     }
 };
